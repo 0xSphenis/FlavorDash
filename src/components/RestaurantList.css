@@ -1,0 +1,13 @@
+.restaurant-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.empty-message {
+  text-align: center;
+  color: #646c73;
+  margin-top: 2rem;
+}

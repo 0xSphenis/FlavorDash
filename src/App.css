@@ -5,4 +5,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+}
+
+.toggle-form-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 999px;
+  background-color: #0e6f33;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(14, 111, 51, 0.2);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.toggle-form-btn:hover {
+  background-color: #0b5928;
+  transform: translateY(-2px);
 }

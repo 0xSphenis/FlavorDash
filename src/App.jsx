@@ -1,25 +1,52 @@
-import { useState } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 import Header from "./components/Header";
-import RestaurantList from './components/RestaurantList';
-import restaurant from "./data/restaurant.json";
-import RestaurantAdd from './components/RestaurantAdd';
+import RestaurantList from "./components/RestaurantList";
+import RestaurantAdd from "./components/RestaurantAdd";
+
 const App = () => {
+  const [restaurantsData, setRestaurantsData] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  useEffect(() => {
+    const fetchRestaurantsData = () => {
+      fetch("/restaurants.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar os dados dos restaurantes");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setRestaurantsData(data);
+        })
+        .catch((error) => {
+          console.error("Falha na requisição:", error);
+        });
+    };
+
+    fetchRestaurantsData();
+  }, []);
+
   function toggleForm() {
     setIsFormVisible((prev) => !prev);
   }
+
   return (
-    <div className='app'>
+    <div className="app">
       <Header />
-  <main className='main-content'>
-    <button onClick={toggleForm} className='toggle-form-btn'>
-      {isFormVisible ? "Fechar Formulário" : "Novo Restaurante"}
-    </button>
-    {isFormVisible && <RestaurantAdd />}
-    <RestaurantList restaurantData={restaurant} />
-  </main>
-  </div>
+
+      <main className="main-content">
+        <button
+          onClick={toggleForm}
+          className={`toggle-form-btn ${isFormVisible ? "cancel" : ""}`}
+        >
+          {isFormVisible ? "Cancelar" : "+ Adicionar Restaurante"}
+        </button>
+
+        {isFormVisible && <RestaurantAdd />}
+        <RestaurantList restaurantData={restaurantsData} />
+      </main>
+    </div>
   );
 };
 

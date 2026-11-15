@@ -6,17 +6,21 @@ const RestaurantCard = ({
   name,
   cuisine,
   isOpen,
-  lastUpdate,
+  _lastUpdate,
   description,
   rating = 4.8,
+  isFavorite = false,
+  onToggleFavorite,
 }) => {
   const [details, setDetails] = useState(null);
+  const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   async function fetchRestaurantDetails() {
     if (details) {
       setDetails(null);
+      setMenu([]);
       return;
     }
 
@@ -24,16 +28,21 @@ const RestaurantCard = ({
     setError(null);
 
     try {
-      const response = await fetch(`/restaurantDetails${id}.json`);
-
-      if (!response.ok) {
+      const detailsResponse = await fetch(`/restaurantDetails${id}.json`);
+      if (!detailsResponse.ok) {
         throw new Error("Não foi possível carregar os detalhes.");
       }
+      const detailsData = await detailsResponse.json();
+      setDetails(detailsData);
 
-      const data = await response.json();
-      setDetails(data);
+      const menuResponse = await fetch(`/restaurantMenu${id}.json`);
+      if (!menuResponse.ok) {
+        throw new Error("Não foi possível carregar o cardápio.");
+      }
+      const menuData = await menuResponse.json();
+      setMenu(menuData);
     } catch (err) {
-      setError("Detalhes indisponíveis para este restaurante no momento.");
+      setError(err.message || "Erro ao carregar informações do restaurante.");
     } finally {
       setLoading(false);
     }
@@ -52,12 +61,22 @@ const RestaurantCard = ({
       <div className="card-body">
         <div className="card-header">
           <h2 className="card-title">{name}</h2>
-          <span className="card-rating">★ {rating}</span>
+          <div className="card-header-actions">
+            <button
+              type="button"
+              className={`favorite-btn ${isFavorite ? "active" : ""}`}
+              onClick={() => onToggleFavorite && onToggleFavorite(id)}
+              aria-label={isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+            >
+              {isFavorite ? "★" : "☆"}
+            </button>
+            <span className="card-rating">★ {rating}</span>
+          </div>
         </div>
 
         <p className="card-description">{description}</p>
 
-        {loading && <p className="details-loading">Carregando detalhes...</p>}
+        {loading && <p className="details-loading">Carregando detalhes e cardápio...</p>}
 
         {error && <p className="details-error">{error}</p>}
 
@@ -67,6 +86,25 @@ const RestaurantCard = ({
             <p><strong>Horário:</strong> {details.openingHours}</p>
             <p><strong>Telefone:</strong> {details.phone}</p>
             <p><strong>Destaque:</strong> {details.highlight}</p>
+
+            {menu.length > 0 && (
+              <div className="card-menu">
+                <h3 className="menu-title">Cardápio</h3>
+                <ul className="menu-list">
+                  {menu.map((item) => (
+                    <li key={item.id} className="menu-item">
+                      <div className="menu-item-header">
+                        <span className="menu-item-name">{item.name}</span>
+                        <span className="menu-item-price">
+                          R$ {item.price.toFixed(2).replace(".", ",")}
+                        </span>
+                      </div>
+                      <p className="menu-item-description">{item.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
 

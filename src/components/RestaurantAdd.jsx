@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./RestaurantAdd.css";
 
-const RestaurantAdd = ({ onAddRestaurant }) => {
+const RestaurantAdd = ({ onAddRestaurant, addRestaurant }) => {
   const [name, setName] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [description, setDescription] = useState("");
   const [isOpen, setIsOpen] = useState(true);
 
   function handleSubmit(event) {
-   event.preventDefault();
+    event.preventDefault();
     const newRestaurant = {
       id: Date.now(),
       name,
@@ -21,6 +21,8 @@ const RestaurantAdd = ({ onAddRestaurant }) => {
     console.log("Novo restaurante criado:", newRestaurant);
     if (onAddRestaurant) {
       onAddRestaurant(newRestaurant);
+    } else if (addRestaurant) {
+      addRestaurant(newRestaurant);
     }
     
     setName("");

@@ -1,0 +1,58 @@
+.dashboard-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.toggle-favorites-btn {
+  padding: 12px 24px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #1e242b;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.toggle-favorites-btn:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.toggle-favorites-btn.active {
+  background-color: #fef08a;
+  border-color: #eab308;
+  color: #854d0e;
+}
+
+.view-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e242b;
+  margin: 10px 0 0 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.dashboard-loading {
+  font-size: 1rem;
+  color: #5a626a;
+  margin: 20px 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.dashboard-error {
+  font-size: 0.95rem;
+  color: #dc2626;
+  background-color: #fef2f2;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  margin: 16px 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}

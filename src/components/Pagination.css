@@ -1,0 +1,74 @@
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 10px 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  width: 100%;
+}
+
+.pagination-info {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-btn {
+  padding: 8px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #1e242b;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: #0e6f33;
+  color: #0e6f33;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #f1f5f9;
+}
+
+.pagination-btn.active {
+  background-color: #0e6f33;
+  border-color: #0e6f33;
+  color: #ffffff;
+}
+
+.pagination-indicator {
+  font-size: 0.85rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+.page-loading-message {
+  font-size: 0.9rem;
+  color: #5a626a;
+  margin: 16px 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}

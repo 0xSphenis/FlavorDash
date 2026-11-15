@@ -1,0 +1,48 @@
+.search-bar {
+  width: 100%;
+  max-width: 680px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 42px 12px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1e242b;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0e6f33;
+  box-shadow: 0 0 0 3px rgba(14, 111, 51, 0.15);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s ease;
+}
+
+.search-clear-btn:hover {
+  color: #374151;
+}
